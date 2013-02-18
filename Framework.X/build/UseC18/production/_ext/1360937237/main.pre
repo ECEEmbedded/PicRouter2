@@ -10114,20 +10114,24 @@ init_timer1_lthread(&t1thread_data);
 
 init_queues();
 
-# 188
+
+TRISA = 0x0;
+LATA = 0x0;
+
+# 186
 OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
 
 
-OpenTimer1(0b11111111 & 0b10011111 & 0b11111111 & 0b11111111 & 0b11111011 & 0b11111111,0x0);
+OpenTimer1(0b11111111 & 0b10011111 & 0b11110111 & 0b11111111 & 0b11111011 & 0b11111111,0x0);
 
-# 199
+# 197
 IPR1bits.TMR1IP = 0;
 
 IPR1bits.RCIP = 0;
 
 IPR1bits.SSPIP = 1;
 
-# 227
+# 225
 PIE1bits.SSPIE = 1;
 
 
@@ -10135,20 +10139,21 @@ PIE1bits.SSPIE = 1;
 Open1USART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
 0b11111111 & 0b11101111, 0x19);
 
-# 240
+# 238
 enable_interrupts();
 
-# 262
+# 260
 I2CInit();
 
 DriverColorAdd(0x50);
+DriverIRAdd(0x49);
 
 while (1) {
 
-# 272
+# 271
 block_on_To_msgqueues();
 
-# 279
+# 278
 length = ToMainHigh_recvmsg(10, &msgtype, (void *) msgbuffer);
 if (length < 0) {
 
@@ -10173,7 +10178,7 @@ break;
 case 42:
 {
 
-# 313
+# 312
 start_i2c_slave_reply(ADCBufferLen, ADCbufferI2C);
 
 break;

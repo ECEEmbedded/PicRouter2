@@ -66,6 +66,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _init_timer1_lthread `(v ~T0 @X0 0 ef1`*S1030 ]
 "43 ../src/messages.h
 [v _init_queues `(v ~T0 @X0 0 ef ]
+"6789 /Applications/microchip/xc8/v1.12/include/pic18f26j50.h
+[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
+"6221
+[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
 "118 /Applications/microchip/xc8/v1.12/include/plib/timers.h
 [v _OpenTimer0 `(v ~T0 @X0 0 ef1`uc ]
 "185
@@ -8144,257 +8148,266 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 170: init_queues();
 "170
 [e ( _init_queues ..  ]
-[; ;main.c: 188: OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
-"188
+[; ;main.c: 173: TRISA = 0x0;
+"173
+[e = _TRISA -> -> 0 `i `uc ]
+[; ;main.c: 174: LATA = 0x0;
+"174
+[e = _LATA -> -> 0 `i `uc ]
+[; ;main.c: 186: OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
+"186
 [e ( _OpenTimer0 (1 -> & & & -> 255 `i -> 191 `i -> 223 `i -> 246 `i `uc ]
-[; ;main.c: 191: OpenTimer1(0b11111111 & 0b10011111 & 0b11111111 & 0b11111111 & 0b11111011 & 0b11111111,0x0);
-"191
-[e ( _OpenTimer1 (2 , -> & & & & & -> 255 `i -> 159 `i -> 255 `i -> 255 `i -> 251 `i -> 255 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 199: IPR1bits.TMR1IP = 0;
-"199
+[; ;main.c: 189: OpenTimer1(0b11111111 & 0b10011111 & 0b11110111 & 0b11111111 & 0b11111011 & 0b11111111,0x0);
+"189
+[e ( _OpenTimer1 (2 , -> & & & & & -> 255 `i -> 159 `i -> 247 `i -> 255 `i -> 251 `i -> 255 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 197: IPR1bits.TMR1IP = 0;
+"197
 [e = . . _IPR1bits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 201: IPR1bits.RCIP = 0;
-"201
+[; ;main.c: 199: IPR1bits.RCIP = 0;
+"199
 [e = . . _IPR1bits 1 3 -> -> 0 `i `uc ]
-[; ;main.c: 203: IPR1bits.SSPIP = 1;
-"203
+[; ;main.c: 201: IPR1bits.SSPIP = 1;
+"201
 [e = . . _IPR1bits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 227: PIE1bits.SSPIE = 1;
-"227
+[; ;main.c: 225: PIE1bits.SSPIE = 1;
+"225
 [e = . . _PIE1bits 1 1 -> -> 1 `i `uc ]
-[; ;main.c: 231: Open1USART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
-[; ;main.c: 232: 0b11111111 & 0b11101111, 0x19);
-"232
+[; ;main.c: 229: Open1USART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
+[; ;main.c: 230: 0b11111111 & 0b11101111, 0x19);
+"230
 [e ( _Open1USART (2 , -> & & & & & -> 127 `i -> 255 `i -> 254 `i -> 253 `i -> 255 `i -> 239 `i `uc -> -> 25 `i `ui ]
-[; ;main.c: 240: enable_interrupts();
-"240
+[; ;main.c: 238: enable_interrupts();
+"238
 [e ( _enable_interrupts ..  ]
-[; ;main.c: 262: I2CInit();
-"262
+[; ;main.c: 260: I2CInit();
+"260
 [e ( _I2CInit ..  ]
-[; ;main.c: 264: DriverColorAdd(0x50);
-"264
+[; ;main.c: 262: DriverColorAdd(0x50);
+"262
 [e ( _DriverColorAdd (1 -> -> 80 `i `uc ]
-[; ;main.c: 266: while (1) {
-"266
+[; ;main.c: 263: DriverIRAdd(0x49);
+"263
+[e ( _DriverIRAdd (1 -> -> 73 `i `uc ]
+[; ;main.c: 265: while (1) {
+"265
 [e :U 1053 ]
 {
-[; ;main.c: 272: block_on_To_msgqueues();
-"272
+[; ;main.c: 271: block_on_To_msgqueues();
+"271
 [e ( _block_on_To_msgqueues ..  ]
-[; ;main.c: 279: length = ToMainHigh_recvmsg(10, &msgtype, (void *) msgbuffer);
-"279
+[; ;main.c: 278: length = ToMainHigh_recvmsg(10, &msgtype, (void *) msgbuffer);
+"278
 [e = _length ( _ToMainHigh_recvmsg (3 , , -> -> 10 `i `uc &U _msgtype -> &U _msgbuffer `*v ]
-[; ;main.c: 280: if (length < 0) {
-"280
+[; ;main.c: 279: if (length < 0) {
+"279
 [e $ ! < -> _length `i -> 0 `i 1055  ]
 {
-[; ;main.c: 282: if (length != -4) {
-"282
+[; ;main.c: 281: if (length != -4) {
+"281
 [e $ ! != -> _length `i -U -> 4 `i 1056  ]
 {
-"284
+"283
 }
 [e :U 1056 ]
-"285
+"284
 }
-[; ;main.c: 284: }
-[; ;main.c: 285: } else {
+[; ;main.c: 283: }
+[; ;main.c: 284: } else {
 [e $U 1057  ]
 [e :U 1055 ]
 {
-[; ;main.c: 286: switch (msgtype) {
-"286
+[; ;main.c: 285: switch (msgtype) {
+"285
 [e $U 1059  ]
 {
-[; ;main.c: 287: case 10:
-"287
+[; ;main.c: 286: case 10:
+"286
 [e :U 1060 ]
-[; ;main.c: 288: {
+[; ;main.c: 287: {
+"287
+{
+[; ;main.c: 288: timer0_lthread(&t0thread_data, msgtype, length, msgbuffer);
 "288
-{
-[; ;main.c: 289: timer0_lthread(&t0thread_data, msgtype, length, msgbuffer);
-"289
 [e ( _timer0_lthread (4 , , , &U _t0thread_data -> _msgtype `i -> _length `i &U _msgbuffer ]
-[; ;main.c: 290: break;
+[; ;main.c: 289: break;
+"289
+[e $U 1058  ]
 "290
-[e $U 1058  ]
+}
+[; ;main.c: 290: };
+[; ;main.c: 291: case 40:
 "291
-}
-[; ;main.c: 291: };
-[; ;main.c: 292: case 40:
-"292
 [e :U 1061 ]
-"293
+"292
 [e :U 1062 ]
-[; ;main.c: 293: case 41:
-[; ;main.c: 294: {
-"294
+[; ;main.c: 292: case 41:
+[; ;main.c: 293: {
+"293
 {
-[; ;main.c: 297: last_reg_recvd = msgbuffer[0];
-"297
+[; ;main.c: 296: last_reg_recvd = msgbuffer[0];
+"296
 [e = _last_reg_recvd *U + &U _msgbuffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _msgbuffer `ui `ux ]
-[; ;main.c: 298: break;
+[; ;main.c: 297: break;
+"297
+[e $U 1058  ]
 "298
-[e $U 1058  ]
+}
+[; ;main.c: 298: };
+[; ;main.c: 299: case 42:
 "299
-}
-[; ;main.c: 299: };
-[; ;main.c: 300: case 42:
-"300
 [e :U 1063 ]
-[; ;main.c: 301: {
-"301
+[; ;main.c: 300: {
+"300
 {
-[; ;main.c: 313: start_i2c_slave_reply(ADCBufferLen, ADCbufferI2C);
-"313
+[; ;main.c: 312: start_i2c_slave_reply(ADCBufferLen, ADCbufferI2C);
+"312
 [e ( _start_i2c_slave_reply (2 , _ADCBufferLen &U _ADCbufferI2C ]
-[; ;main.c: 315: break;
+[; ;main.c: 314: break;
+"314
+[e $U 1058  ]
 "315
-[e $U 1058  ]
-"316
 }
-[; ;main.c: 316: };
-[; ;main.c: 317: default:
-"317
+[; ;main.c: 315: };
+[; ;main.c: 316: default:
+"316
 [e :U 1064 ]
-[; ;main.c: 318: {
-"318
+[; ;main.c: 317: {
+"317
 {
-[; ;main.c: 320: break;
-"320
+[; ;main.c: 319: break;
+"319
 [e $U 1058  ]
+"320
+}
+[; ;main.c: 320: };
 "321
 }
 [; ;main.c: 321: };
-"322
-}
-[; ;main.c: 322: };
 [e $U 1058  ]
-"286
+"285
 [e :U 1059 ]
 [e [\ _msgtype , $ -> -> 10 `i `uc 1060
  , $ -> -> 40 `i `uc 1061
  , $ -> -> 41 `i `uc 1062
  , $ -> -> 42 `i `uc 1063
  1064 ]
-"322
+"321
 [e :U 1058 ]
-"323
+"322
 }
 [e :U 1057 ]
-[; ;main.c: 323: }
-[; ;main.c: 326: length = ToMainLow_recvmsg(10, &msgtype, (void *) msgbuffer);
-"326
+[; ;main.c: 322: }
+[; ;main.c: 325: length = ToMainLow_recvmsg(10, &msgtype, (void *) msgbuffer);
+"325
 [e = _length ( _ToMainLow_recvmsg (3 , , -> -> 10 `i `uc &U _msgtype -> &U _msgbuffer `*v ]
-[; ;main.c: 327: if (length < 0) {
-"327
+[; ;main.c: 326: if (length < 0) {
+"326
 [e $ ! < -> _length `i -> 0 `i 1065  ]
 {
-[; ;main.c: 329: if (length != -4) {
-"329
+[; ;main.c: 328: if (length != -4) {
+"328
 [e $ ! != -> _length `i -U -> 4 `i 1066  ]
 {
-"331
+"330
 }
 [e :U 1066 ]
-"332
+"331
 }
-[; ;main.c: 331: }
-[; ;main.c: 332: } else {
+[; ;main.c: 330: }
+[; ;main.c: 331: } else {
 [e $U 1067  ]
 [e :U 1065 ]
 {
-[; ;main.c: 333: switch (msgtype) {
-"333
+[; ;main.c: 332: switch (msgtype) {
+"332
 [e $U 1069  ]
 {
-[; ;main.c: 334: case 11:
-"334
+[; ;main.c: 333: case 11:
+"333
 [e :U 1070 ]
-[; ;main.c: 335: {
-"335
+[; ;main.c: 334: {
+"334
 {
-[; ;main.c: 336: for (unsigned char i = 0; i < NumberOfDrivers; ++i)
-"336
+[; ;main.c: 335: for (unsigned char i = 0; i < NumberOfDrivers; ++i)
+"335
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
 [e $U 1074  ]
-"337
-[e :U 1071 ]
-[; ;main.c: 337: DriverTable[i].poll(DriverTable[i].context);
-[e ( *U . *U + &U _DriverTable * -> _i `ux -> -> # *U &U _DriverTable `ui `ux 3 (1 . *U + &U _DriverTable * -> _i `ux -> -> # *U &U _DriverTable `ui `ux 1 ]
 "336
+[e :U 1071 ]
+[; ;main.c: 336: DriverTable[i].poll(DriverTable[i].context);
+[e ( *U . *U + &U _DriverTable * -> _i `ux -> -> # *U &U _DriverTable `ui `ux 3 (1 . *U + &U _DriverTable * -> _i `ux -> -> # *U &U _DriverTable `ui `ux 1 ]
+"335
 [e =+ _i -> -> 1 `i `uc ]
 [e :U 1074 ]
 [e $ < -> _i `i -> _NumberOfDrivers `i 1071  ]
 [e :U 1072 ]
+"336
+}
+[; ;main.c: 337: timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
 "337
-}
-[; ;main.c: 338: timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
-"338
 [e ( _timer1_lthread (4 , , , &U _t1thread_data -> _msgtype `i -> _length `i &U _msgbuffer ]
-[; ;main.c: 339: break;
+[; ;main.c: 338: break;
+"338
+[e $U 1068  ]
 "339
-[e $U 1068  ]
-"340
 }
-[; ;main.c: 340: };
-[; ;main.c: 342: case 30:
-"342
+[; ;main.c: 339: };
+[; ;main.c: 341: case 30:
+"341
 [e :U 1075 ]
-"343
+"342
 [e :U 1076 ]
-[; ;main.c: 343: case 31:
-[; ;main.c: 344: {
+[; ;main.c: 342: case 31:
+[; ;main.c: 343: {
+"343
+{
+[; ;main.c: 344: uart_lthread(&uthread_data, msgtype, length, msgbuffer);
 "344
-{
-[; ;main.c: 345: uart_lthread(&uthread_data, msgtype, length, msgbuffer);
-"345
 [e ( _uart_lthread (4 , , , &U _uthread_data -> _msgtype `i -> _length `i &U _msgbuffer ]
-[; ;main.c: 346: break;
+[; ;main.c: 345: break;
+"345
+[e $U 1068  ]
 "346
-[e $U 1068  ]
-"347
 }
-[; ;main.c: 347: };
-[; ;main.c: 348: default:
-"348
+[; ;main.c: 346: };
+[; ;main.c: 347: default:
+"347
 [e :U 1077 ]
-[; ;main.c: 349: {
-"349
+[; ;main.c: 348: {
+"348
 {
-[; ;main.c: 351: break;
-"351
+[; ;main.c: 350: break;
+"350
 [e $U 1068  ]
+"351
+}
+[; ;main.c: 351: };
 "352
 }
 [; ;main.c: 352: };
-"353
-}
-[; ;main.c: 353: };
 [e $U 1068  ]
-"333
+"332
 [e :U 1069 ]
 [e [\ _msgtype , $ -> -> 11 `i `uc 1070
  , $ -> -> 30 `i `uc 1075
  , $ -> -> 31 `i `uc 1076
  1077 ]
-"353
+"352
 [e :U 1068 ]
-"354
+"353
 }
 [e :U 1067 ]
-"355
+"354
 }
 [e :U 1052 ]
-"266
+"265
 [e $U 1053  ]
 [e :U 1054 ]
+[; ;main.c: 353: }
 [; ;main.c: 354: }
-[; ;main.c: 355: }
-[; ;main.c: 357: }
-"357
+[; ;main.c: 356: }
+"356
 [e :UE 1051 ]
 }

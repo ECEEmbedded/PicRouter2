@@ -169,11 +169,9 @@ void main(void) {
     // initialize message queues before enabling any interrupts
     init_queues();
 
-#ifndef __USE18F26J50
     // set direction for PORTB to output
-    TRISB = 0x0;
-    LATB = 0x0;
-#endif
+    TRISA = 0x0;
+    LATA = 0x0;
 
     // how to set up PORTA for input (for the V4 board with the PIC2680)
     /*
@@ -188,7 +186,7 @@ void main(void) {
     OpenTimer0(TIMER_INT_ON & T0_16BIT & T0_SOURCE_INT & T0_PS_1_128);
 #ifdef __USE18F26J50
     // MTJ added second argument for OpenTimer1()
-    OpenTimer1(TIMER_INT_ON & T1_SOURCE_FOSC_4 & T1_PS_1_8 & T1_16BIT_RW & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF,0x0);
+    OpenTimer1(TIMER_INT_ON & T1_SOURCE_FOSC_4 & T1_PS_1_4 & T1_16BIT_RW & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF,0x0);
 #else
     OpenTimer1(TIMER_INT_ON & T1_PS_1_8 & T1_16BIT_RW & T1_SOURCE_INT & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
 #endif
@@ -262,6 +260,7 @@ void main(void) {
     I2CInit();
     
     DriverColorAdd(0x50);
+    DriverIRAdd(0x49);
     
     while (1) {
 
