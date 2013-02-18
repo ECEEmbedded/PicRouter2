@@ -3,6 +3,7 @@
 
     #include "debug.h"
     #include "i2cMaster.h"
+    #include "my_uart.h"
     
     unsigned char DriverHeap[10];
     unsigned char *heapPointer = DriverHeap;

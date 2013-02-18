@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="62">
   <logicalFolder name="root" displayName="root" projectFiles="true">
-    <logicalFolder name="f1" displayName="Drivers" projectFiles="true">
-      <itemPath>Drivers/Color.rb</itemPath>
-      <itemPath>Drivers/IR.rb</itemPath>
-      <itemPath>Drivers/Motor.rb</itemPath>
-    </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <logicalFolder name="f1" displayName="Drivers" projectFiles="true">
-        <itemPath>../src/drivers.h</itemPath>
-        <itemPath>../src/IR.h</itemPath>
-        <itemPath>../src/Motor.h</itemPath>
-        <itemPath>../src/Color.h</itemPath>
-      </logicalFolder>
       <itemPath>../src/interrupts.h</itemPath>
       <itemPath>../src/maindefs.h</itemPath>
       <itemPath>../src/messages.h</itemPath>
@@ -35,6 +24,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="Drivers" projectFiles="true">
+        <itemPath>../src/Drivers/Color.rb</itemPath>
+        <itemPath>../src/Drivers/IR.rb</itemPath>
+        <itemPath>../src/Drivers/Motor.rb</itemPath>
+      </logicalFolder>
       <itemPath>../src/interrupts.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/messages.c</itemPath>
@@ -62,7 +56,7 @@
     <conf name="UseXC8" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC18F26J50</targetDevice>
+        <targetDevice>PIC18F2680</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit2PlatformTool</platformTool>
@@ -159,7 +153,7 @@
     <conf name="UseC18" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC18F26J50</targetDevice>
+        <targetDevice>PIC18F2680</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>PICkit3PlatformTool</platformTool>
@@ -186,55 +180,6 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>true</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <C18>
-        <property key="code-model" value="mS"/>
-        <property key="data-model" value="Oa-"/>
-        <property key="default-char-unsigned" value="false"/>
-        <property key="enable-all-optimizations" value="true"/>
-        <property key="enable-int-promotion" value="false"/>
-        <property key="enable-multi-bank-stack-model" value="false"/>
-        <property key="enable-ob" value="false"/>
-        <property key="enable-od" value="false"/>
-        <property key="enable-om" value="true"/>
-        <property key="enable-on" value="true"/>
-        <property key="enable-op" value="false"/>
-        <property key="enable-opa" value="false"/>
-        <property key="enable-or" value="false"/>
-        <property key="enable-os" value="true"/>
-        <property key="enable-ot" value="false"/>
-        <property key="enable-ou" value="false"/>
-        <property key="enable-ow" value="true"/>
-        <property key="extra-include-directories" value=""/>
-        <property key="optimization-master" value="Debug friendly"/>
-        <property key="preprocessor-macros" value=""/>
-        <property key="procedural-abstraction-passes" value="0"/>
-        <property key="storage-class" value="sca"/>
-        <property key="verbose" value="false"/>
-        <property key="warning-level" value="2"/>
-      </C18>
-      <C18-AS>
-        <property key="cross.reference.file" value=""/>
-        <property key="default.radix" value="HEX"/>
-        <property key="enable.case.sensitivity" value="false"/>
-        <property key="hex.output.format" value="INHX32"/>
-        <property key="preprocessor.macros" value=""/>
-        <property key="warning.level" value="0"/>
-      </C18-AS>
-      <C18-LD>
-        <property key="cod-file" value="true"/>
-        <property key="extra-lib-directories" value=""/>
-        <property key="hex-output-format" value="INHX32"/>
-        <property key="map-file" value=""/>
-      </C18-LD>
-      <C18LanguageToolchain>
-        <property key="extended-mode" value="true"/>
-        <property key="extended-mode-mcc18" value="true"/>
-        <property key="extended-mode-mpasm" value="true"/>
-        <property key="extended-mode-mplink" value="true"/>
-        <property key="stack-analysis" value="true"/>
-        <property key="stack-analysis-mcc18" value="true"/>
-        <property key="stack-analysis-mplink" value="true"/>
-      </C18LanguageToolchain>
       <HI-TECH-COMP>
         <property key="define-macros" value=""/>
         <property key="extra-include-directories" value=""/>
@@ -257,13 +202,6 @@
       </HI-TECH-COMP>
       <HI-TECH-LINK>
       </HI-TECH-LINK>
-      <PICkit2PlatformTool>
-        <property key="pk2settings.3state" value="false"/>
-        <property key="pk2settings.preserveee" value="false"/>
-        <property key="pk2settings.setvddvoltage" value="3.25"/>
-        <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.usetargetpower" value="false"/>
-      </PICkit2PlatformTool>
       <PICkit3PlatformTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="Freeze Peripherals" value="true"/>
@@ -294,6 +232,8 @@
         <property key="programoptions.uselvpprogramming" value="false"/>
         <property key="voltagevalue" value="3.25"/>
       </PICkit3PlatformTool>
+      <XC8-config-global>
+      </XC8-config-global>
     </conf>
   </confs>
 </configurationDescriptor>

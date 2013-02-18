@@ -133,7 +133,8 @@ void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned ch
     I2CSend(id << 1);
 
     I2CSend(registerAddress);
-    I2CStart();
+
+    I2CRestart();
     
     for (int i = 0; i < N; ++i) {
             I2CSend(id << 1 | 1);
@@ -145,7 +146,6 @@ void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned ch
                     I2CAck();
     }
 
-    I2CNak();
     I2CStop();
 }
 

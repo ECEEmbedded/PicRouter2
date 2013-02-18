@@ -7,9 +7,9 @@ end
 
 #Get all drivers
 driverFiles = []
-driverPath = "#{Dir.pwd}/Drivers/"
+driverPath = "#{Dir.pwd}/../src/Drivers/"
 Dir.entries(driverPath).each do |file|
-  if file.include? ".rb" and !file.include? ".swp"
+  if file.include? ".rb" and !file.include? ".sw"
     driverFiles << {
       :name => file.gsub(/\..*/, ""),
       :fullPath => driverPath + file,
@@ -112,6 +112,7 @@ File.open("#{Dir.pwd}/../src/drivers.h", "w+") do |file|
   file << %{
     #include "debug.h"
     #include "i2cMaster.h"
+    #include "my_uart.h"
     
     unsigned char DriverHeap[10];
     unsigned char *heapPointer = DriverHeap;

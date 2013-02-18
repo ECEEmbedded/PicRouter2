@@ -21,9 +21,9 @@ end
 
 @poll = lambda do
   out %{
-   //LATAbits.LATA0 = !LATAbits.LATA0;
    unsigned char data[1];
-   data[0] = 0x02;
-    I2CWriteRequest(self->id, 0x30, data, 1);
+   data[0] = 0x2;
+   I2CReadRequest(self->id, 0x30, data, 1);
+   start_UART_send(1, data);
   }
 end

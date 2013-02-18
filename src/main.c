@@ -158,7 +158,7 @@ void main(void) {
 #endif
 
     // initialize my uart recv handling code
-    init_uart_recv(&uc);
+    init_uart_snd_rcv(&uc);
 
     // initialize the i2c code
   //   init_i2c(&ic);
@@ -171,7 +171,7 @@ void main(void) {
 
     // set direction for PORTB to output
     TRISA = 0x0;
-    LATA = 0x0;
+   // LATA = 0x0;
 
     // how to set up PORTA for input (for the V4 board with the PIC2680)
     /*
@@ -257,9 +257,13 @@ void main(void) {
     // that should get them.  Although the subroutines are not threads, but
     // they can be equated with the tasks in your task diagram if you
     // structure them properly
+
+    //Init I2C
     I2CInit();
-    
-    DriverColorAdd(0x50);
+//    OpenI2C(MASTER, SLEW_OFF);
+
+    //Load Drivers
+    DriverColorAdd(0x4F);
     DriverIRAdd(0x49);
     
     while (1) {
@@ -309,7 +313,7 @@ void main(void) {
 /*                    i2cmsg *tmpPtr = i2c_addressable_registers + 2;//(last_reg_recvd - 0xA8);
                     start_i2c_slave_reply(tmpPtr->length, tmpPtr->data);
 */
-                    start_i2c_slave_reply(ADCBufferLen, ADCbufferI2C);
+                   // start_i2c_slave_reply(ADCBufferLen, ADCbufferI2C);
 
                     break;
                 };

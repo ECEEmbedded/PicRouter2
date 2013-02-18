@@ -53,6 +53,7 @@ void InterruptHandlerHigh();
 void InterruptHandlerLow();
 
 #pragma code InterruptVectorLow = 0x18
+
 void
 InterruptVectorLow(void) {
     _asm
@@ -61,6 +62,7 @@ InterruptVectorLow(void) {
 }
 
 #pragma code InterruptVectorHigh = 0x08
+
 void
 InterruptVectorHigh(void) {
     _asm
@@ -79,6 +81,9 @@ interrupt
 #pragma interrupt InterruptHandlerHigh
 #endif
 void InterruptHandlerHigh() {
+    // We need to check the interrupt flag of each enabled high-priority interrupt to
+    // see which device generated this interrupt.  Then we can call the correct handler.
+
     // check to see if we have an I2C interrupt
     if (PIR1bits.SSPIF) {
         // clear the interrupt flag
@@ -94,11 +99,25 @@ void InterruptHandlerHigh() {
         timer0_int_handler();
     }
 
+    // Check for ADC interrupt
+    //if (PIR1bits.ADIF) {
+    //    adcIntHandler();
+    //}
+
+    // here is where you would check other interrupt flags.
+
+    // The *last* thing I do here is check to see if we can
+    // allow the processor to go to sleep
+    // This code *DEPENDS* on the code in messages.c being
+    // initialized using "init_queues()" -- if you aren't using
+    // this, then you shouldn't have this call here
     SleepIfOkay();
 }
 
 //----------------------------------------------------------------------------
 // Low priority interrupt routine
+// this parcels out interrupts to individual handlers
+// This works the same way as the "High" interrupt handler
 #ifdef __XC8
 interrupt low_priority
 #else
@@ -117,5 +136,11 @@ void InterruptHandlerLow() {
         PIR1bits.RCIF = 0; //clear interrupt flag
         uart_recv_int_handler();
     }
+
+    // check to see if we have an interrupt on USART TX
+    if (PIR1bits.TXIF) {
+        uart_send_int_handler();
+    }
 }
+
 

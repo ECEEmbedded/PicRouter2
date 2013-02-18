@@ -66,7 +66,7 @@ LDLIBSOPTIONS=
 FIXDEPS=fixDeps
 
 # The following macros may be used in the pre and post step lines
-Device=PIC18F26J50
+Device=PIC18F2680
 ProjectDir=/Users/sotownsend/Dev/Embedded/PicRouter2/Framework.X
 ConfName=UseC18
 ImagePath=dist/UseC18/${IMAGE_TYPE}/Framework.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
@@ -76,7 +76,7 @@ ImageName=Framework.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 .build-conf:  .pre ${BUILD_SUBPROJECTS}
 	${MAKE}  -f nbproject/Makefile-UseC18.mk dist/${CND_CONF}/${IMAGE_TYPE}/Framework.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=18F26J50
+MP_PROCESSOR_OPTION=18F2680
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
