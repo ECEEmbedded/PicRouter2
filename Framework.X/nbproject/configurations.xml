@@ -9,6 +9,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="Drivers" projectFiles="true">
+        <itemPath>../src/drivers.h</itemPath>
+        <itemPath>../src/IR.h</itemPath>
+        <itemPath>../src/Motor.h</itemPath>
+        <itemPath>../src/Color.h</itemPath>
+      </logicalFolder>
       <itemPath>../src/interrupts.h</itemPath>
       <itemPath>../src/maindefs.h</itemPath>
       <itemPath>../src/messages.h</itemPath>

@@ -9758,41 +9758,12 @@ extern int vsscanf(const char *, const char *, va_list);
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 22 "../src/i2cMaster.h"
+# 17 "../src/i2cMaster.h"
 void I2CInit(void);
 
-# 30
-void I2CStart();
+void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
 
-# 38
-void I2CStop();
-
-# 45
-void I2CRestart();
-
-# 52
-void I2CAck();
-
-# 59
-void I2CNak();
-
-# 66
-void I2CWait();
-
-# 75
-void I2CSend(unsigned char dat);
-
-# 82
-unsigned char I2CRead(void);
-
-
-unsigned char I2CReadOneByte(unsigned char id, unsigned char registerAddress);
-
-# 90
-void I2CReadNBytes(int n, unsigned char *data, unsigned char id, unsigned char registerAddress);
-
-
-unsigned char I2CWriteOneByte(unsigned char id, unsigned char registerAddress, unsigned char data);
+void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
 
 # 9 "../src/i2cMaster.c"
 void I2CInit(void){
@@ -9876,27 +9847,35 @@ I2CStop();
 return out;
 }
 
-# 134
-void I2CReadNBytes(int N, unsigned char *data, unsigned char id, unsigned char registerAddress) {
+void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
 I2CStart();
 I2CSend(id << 1);
+
 I2CSend(registerAddress);
+I2CStart();
 
 for (int i = 0; i < N; ++i) {
-
-I2CStart();
 I2CSend(id << 1 | 1);
 data[i] = I2CRead();
+
+if (i == N - 1)
+I2CNak();
+else
+I2CAck();
 }
 
 I2CNak();
 I2CStop();
 }
 
-unsigned char I2CWriteOneByte(unsigned char id, unsigned char registerAddress, unsigned char data) {
+void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
 I2CStart();
 I2CSend(id << 1);
+
 I2CSend(registerAddress);
-I2CSend(data);
+
+for (int i = 0; i < N; ++i)
+I2CSend(data[i]);
+
 I2CStop();
 }

@@ -7541,18 +7541,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 201: extern int vsscanf(const char *, const char *, va_list);
 [; ;stdio.h: 205: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 206: extern int printf(const char *, ...);
-[; ;i2cMaster.h: 22: void I2CInit(void);
-[; ;i2cMaster.h: 30: void I2CStart();
-[; ;i2cMaster.h: 38: void I2CStop();
-[; ;i2cMaster.h: 45: void I2CRestart();
-[; ;i2cMaster.h: 52: void I2CAck();
-[; ;i2cMaster.h: 59: void I2CNak();
-[; ;i2cMaster.h: 66: void I2CWait();
-[; ;i2cMaster.h: 75: void I2CSend(unsigned char dat);
-[; ;i2cMaster.h: 82: unsigned char I2CRead(void);
-[; ;i2cMaster.h: 85: unsigned char I2CReadOneByte(unsigned char id, unsigned char registerAddress);
-[; ;i2cMaster.h: 90: void I2CReadNBytes(int n, unsigned char *data, unsigned char id, unsigned char registerAddress);
-[; ;i2cMaster.h: 93: unsigned char I2CWriteOneByte(unsigned char id, unsigned char registerAddress, unsigned char data);
+[; ;i2cMaster.h: 17: void I2CInit(void);
+[; ;i2cMaster.h: 19: void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
+[; ;i2cMaster.h: 21: void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
 "9 ../src/i2cMaster.c
 [v _I2CInit `(v ~T0 @X0 1 ef ]
 {
@@ -7799,87 +7790,116 @@ Version 3.2 HI-TECH Software Intermediate Code
 "129
 [e :UE 1058 ]
 }
-"134
-[v _I2CReadNBytes `(v ~T0 @X0 1 ef4`i`*uc`uc`uc ]
+"131
+[v _I2CReadRequest `(v ~T0 @X0 1 ef4`uc`uc`*uc`i ]
 {
-[; ;i2cMaster.c: 134: void I2CReadNBytes(int N, unsigned char *data, unsigned char id, unsigned char registerAddress) {
-[e :U _I2CReadNBytes ]
-[v _N `i ~T0 @X0 1 r1 ]
-[v _data `*uc ~T0 @X0 1 r2 ]
-[v _id `uc ~T0 @X0 1 r3 ]
-[v _registerAddress `uc ~T0 @X0 1 r4 ]
+[; ;i2cMaster.c: 131: void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
+[e :U _I2CReadRequest ]
+[v _id `uc ~T0 @X0 1 r1 ]
+[v _registerAddress `uc ~T0 @X0 1 r2 ]
+[v _data `*uc ~T0 @X0 1 r3 ]
+[v _N `i ~T0 @X0 1 r4 ]
 [f ]
-[; ;i2cMaster.c: 135: I2CStart();
-"135
+[; ;i2cMaster.c: 132: I2CStart();
+"132
 [e ( _I2CStart ..  ]
-[; ;i2cMaster.c: 136: I2CSend(id << 1);
-"136
+[; ;i2cMaster.c: 133: I2CSend(id << 1);
+"133
 [e ( _I2CSend (1 -> << -> _id `i -> 1 `i `uc ]
-[; ;i2cMaster.c: 137: I2CSend(registerAddress);
-"137
+[; ;i2cMaster.c: 135: I2CSend(registerAddress);
+"135
 [e ( _I2CSend (1 _registerAddress ]
-[; ;i2cMaster.c: 139: for (int i = 0; i < N; ++i) {
-"139
+[; ;i2cMaster.c: 136: I2CStart();
+"136
+[e ( _I2CStart ..  ]
+[; ;i2cMaster.c: 138: for (int i = 0; i < N; ++i) {
+"138
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $U 1063  ]
 [e :U 1060 ]
 {
-[; ;i2cMaster.c: 141: I2CStart();
-"141
-[e ( _I2CStart ..  ]
-[; ;i2cMaster.c: 142: I2CSend(id << 1 | 1);
-"142
-[e ( _I2CSend (1 -> | << -> _id `i -> 1 `i -> 1 `i `uc ]
-[; ;i2cMaster.c: 143: data[i] = I2CRead();
-"143
-[e = *U + _data * -> _i `x -> -> # *U _data `i `x ( _I2CRead ..  ]
-"144
-}
+[; ;i2cMaster.c: 139: I2CSend(id << 1 | 1);
 "139
+[e ( _I2CSend (1 -> | << -> _id `i -> 1 `i -> 1 `i `uc ]
+[; ;i2cMaster.c: 140: data[i] = I2CRead();
+"140
+[e = *U + _data * -> _i `x -> -> # *U _data `i `x ( _I2CRead ..  ]
+[; ;i2cMaster.c: 142: if (i == N - 1)
+"142
+[e $ ! == _i - _N -> 1 `i 1064  ]
+[; ;i2cMaster.c: 143: I2CNak();
+"143
+[e ( _I2CNak ..  ]
+[e $U 1065  ]
+"144
+[e :U 1064 ]
+[; ;i2cMaster.c: 144: else
+[; ;i2cMaster.c: 145: I2CAck();
+"145
+[e ( _I2CAck ..  ]
+[e :U 1065 ]
+"146
+}
+"138
 [e =+ _i -> 1 `i ]
 [e :U 1063 ]
 [e $ < _i _N 1060  ]
 [e :U 1061 ]
-"144
-}
-[; ;i2cMaster.c: 144: }
-[; ;i2cMaster.c: 146: I2CNak();
 "146
-[e ( _I2CNak ..  ]
-[; ;i2cMaster.c: 147: I2CStop();
-"147
-[e ( _I2CStop ..  ]
-[; ;i2cMaster.c: 148: }
+}
+[; ;i2cMaster.c: 146: }
+[; ;i2cMaster.c: 148: I2CNak();
 "148
+[e ( _I2CNak ..  ]
+[; ;i2cMaster.c: 149: I2CStop();
+"149
+[e ( _I2CStop ..  ]
+[; ;i2cMaster.c: 150: }
+"150
 [e :UE 1059 ]
 }
-"150
-[v _I2CWriteOneByte `(uc ~T0 @X0 1 ef3`uc`uc`uc ]
+"152
+[v _I2CWriteRequest `(v ~T0 @X0 1 ef4`uc`uc`*uc`i ]
 {
-[; ;i2cMaster.c: 150: unsigned char I2CWriteOneByte(unsigned char id, unsigned char registerAddress, unsigned char data) {
-[e :U _I2CWriteOneByte ]
+[; ;i2cMaster.c: 152: void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
+[e :U _I2CWriteRequest ]
 [v _id `uc ~T0 @X0 1 r1 ]
 [v _registerAddress `uc ~T0 @X0 1 r2 ]
-[v _data `uc ~T0 @X0 1 r3 ]
+[v _data `*uc ~T0 @X0 1 r3 ]
+[v _N `i ~T0 @X0 1 r4 ]
 [f ]
-[; ;i2cMaster.c: 151: I2CStart();
-"151
-[e ( _I2CStart ..  ]
-[; ;i2cMaster.c: 152: I2CSend(id << 1);
-"152
-[e ( _I2CSend (1 -> << -> _id `i -> 1 `i `uc ]
-[; ;i2cMaster.c: 153: I2CSend(registerAddress);
+[; ;i2cMaster.c: 153: I2CStart();
 "153
-[e ( _I2CSend (1 _registerAddress ]
-[; ;i2cMaster.c: 154: I2CSend(data);
+[e ( _I2CStart ..  ]
+[; ;i2cMaster.c: 154: I2CSend(id << 1);
 "154
-[e ( _I2CSend (1 _data ]
-[; ;i2cMaster.c: 155: I2CStop();
-"155
-[e ( _I2CStop ..  ]
-[; ;i2cMaster.c: 156: }
+[e ( _I2CSend (1 -> << -> _id `i -> 1 `i `uc ]
+[; ;i2cMaster.c: 156: I2CSend(registerAddress);
 "156
-[e :UE 1064 ]
+[e ( _I2CSend (1 _registerAddress ]
+[; ;i2cMaster.c: 158: for (int i = 0; i < N; ++i)
+"158
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 1070  ]
+"159
+[e :U 1067 ]
+[; ;i2cMaster.c: 159: I2CSend(data[i]);
+[e ( _I2CSend (1 *U + _data * -> _i `x -> -> # *U _data `i `x ]
+"158
+[e =+ _i -> 1 `i ]
+[e :U 1070 ]
+[e $ < _i _N 1067  ]
+[e :U 1068 ]
+"159
+}
+[; ;i2cMaster.c: 161: I2CStop();
+"161
+[e ( _I2CStop ..  ]
+[; ;i2cMaster.c: 162: }
+"162
+[e :UE 1066 ]
 }

@@ -17,6 +17,7 @@
 #include "timer1_thread.h"
 #include "timer0_thread.h"
 #include "i2cMaster.h"
+#include "drivers.h"
 
 #ifdef __USE18F45J10
 // CONFIG1L
@@ -260,10 +261,7 @@ void main(void) {
     // structure them properly
     I2CInit();
     
-    unsigned char data[4];
-    //WriteOneByte(Id, Register, Data)
-    I2CWriteOneByte(0x50, 0x30, 0x22);
-    I2CReadNBytes(1, data, 0x50, 0x30);
+    DriverColorAdd(0x50);
     
     while (1) {
 
@@ -335,6 +333,8 @@ void main(void) {
             switch (msgtype) {
                 case MSGT_TIMER1:
                 {
+                  for (unsigned char i = 0; i < NumberOfDrivers; ++i)
+                    DriverTable[i].poll(DriverTable[i].context);
                     timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
                     break;
                 };

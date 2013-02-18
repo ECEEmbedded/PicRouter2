@@ -9868,44 +9868,183 @@ int data;
 
 int timer0_lthread(timer0_thread_struct *,int,int,unsigned char*);
 
-# 22 "../src/i2cMaster.h"
+# 17 "../src/i2cMaster.h"
 void I2CInit(void);
 
-# 30
-void I2CStart();
+void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
 
-# 38
-void I2CStop();
+void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
 
-# 45
-void I2CRestart();
+# 16 "../src/debug.h"
+void DebugPrint(unsigned char out);
 
-# 52
-void I2CAck();
+# 24
+void DebugSignal();
 
-# 59
-void I2CNak();
+# 7 "../src/drivers.h"
+unsigned char DriverHeap[10];
+unsigned char *heapPointer = DriverHeap;
+unsigned char *driverMalloc(int size) {
+unsigned char *temp = heapPointer;
 
-# 66
-void I2CWait();
+heapPointer += size;
 
-# 75
-void I2CSend(unsigned char dat);
-
-# 82
-unsigned char I2CRead(void);
+return temp;
+}
 
 
-unsigned char I2CReadOneByte(unsigned char id, unsigned char registerAddress);
 
-# 90
-void I2CReadNBytes(int n, unsigned char *data, unsigned char id, unsigned char registerAddress);
+typedef struct DRIVER_T {
+unsigned char id;
+unsigned char class;
+unsigned char data[10];
+} Driver_t;
+
+typedef struct RRPACKET_T {
+unsigned char id;
+unsigned char class;
+unsigned char data[4];
+} RRPacket_t;
 
 
-unsigned char I2CWriteOneByte(unsigned char id, unsigned char registerAddress, unsigned char data);
+typedef struct DRIVER_TABLE_ENT_T {
+unsigned char id;
+Driver_t *context;
+void (*respond)(Driver_t *, unsigned char *);
+void (*poll)(Driver_t *);
+} Driver_Table_Ent_t;
 
 
-# 81 "../src/main.c"
+Driver_Table_Ent_t DriverTable[10];
+unsigned char NumberOfDrivers = 0;
+
+# 4 "../src/Color.h"
+typedef struct DRIVERColorMEMBERS {
+unsigned char id;
+unsigned char class;
+
+
+unsigned char a;
+
+} DriverColorMembers;
+void DriverColorInit(Driver_t *driver) {
+DriverColorMembers *self = (DriverColorMembers *)driver;
+
+self->a = 0xE;
+DebugPrint(self->a);
+
+}
+void DriverColorRespond(Driver_t *driver, unsigned char *rcvData) {
+DriverColorMembers *self = (DriverColorMembers *)driver;
+
+
+}
+void DriverColorPoll(Driver_t *driver) {
+DriverColorMembers *self = (DriverColorMembers *)driver;
+
+
+unsigned char data[1];
+data[0] = 0x02;
+I2CWriteRequest(self->id, 0x30, data, 1);
+
+}
+
+void DriverColorAdd(unsigned char id) {
+Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
+context->id = id;
+context->class = 0x20;
+DriverTable[NumberOfDrivers].context = context;
+DriverTable[NumberOfDrivers].respond = DriverColorRespond;
+DriverTable[NumberOfDrivers].poll = DriverColorPoll;
+++NumberOfDrivers;
+
+DriverColorInit(context);
+}
+
+# 4 "../src/IR.h"
+typedef struct DRIVERIRMEMBERS {
+unsigned char id;
+unsigned char class;
+
+
+unsigned char a;
+
+} DriverIRMembers;
+void DriverIRInit(Driver_t *driver) {
+DriverIRMembers *self = (DriverIRMembers *)driver;
+
+self->a = 0xE;
+DebugPrint(self->a);
+
+}
+void DriverIRRespond(Driver_t *driver, unsigned char *rcvData) {
+DriverIRMembers *self = (DriverIRMembers *)driver;
+
+
+}
+void DriverIRPoll(Driver_t *driver) {
+DriverIRMembers *self = (DriverIRMembers *)driver;
+
+
+LATAbits.LATA1 = !LATAbits.LATA1;
+
+}
+
+void DriverIRAdd(unsigned char id) {
+Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
+context->id = id;
+context->class = 0x3A;
+DriverTable[NumberOfDrivers].context = context;
+DriverTable[NumberOfDrivers].respond = DriverIRRespond;
+DriverTable[NumberOfDrivers].poll = DriverIRPoll;
+++NumberOfDrivers;
+
+DriverIRInit(context);
+}
+
+# 4 "../src/Motor.h"
+typedef struct DRIVERMotorMEMBERS {
+unsigned char id;
+unsigned char class;
+
+
+unsigned char a;
+
+} DriverMotorMembers;
+void DriverMotorInit(Driver_t *driver) {
+DriverMotorMembers *self = (DriverMotorMembers *)driver;
+
+self->a = 0xE;
+DebugPrint(self->a);
+
+}
+void DriverMotorRespond(Driver_t *driver, unsigned char *rcvData) {
+DriverMotorMembers *self = (DriverMotorMembers *)driver;
+
+
+}
+void DriverMotorPoll(Driver_t *driver) {
+DriverMotorMembers *self = (DriverMotorMembers *)driver;
+
+
+LATAbits.LATA2 = !LATAbits.LATA2;
+
+}
+
+void DriverMotorAdd(unsigned char id) {
+Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
+context->id = id;
+context->class = 0x4F;
+DriverTable[NumberOfDrivers].context = context;
+DriverTable[NumberOfDrivers].respond = DriverMotorRespond;
+DriverTable[NumberOfDrivers].poll = DriverMotorPoll;
+++NumberOfDrivers;
+
+DriverMotorInit(context);
+}
+
+
+# 82 "../src/main.c"
 #pragma config WDTEN = OFF
 #pragma config PLLDIV = 3
 #pragma config STVREN = OFF
@@ -9944,7 +10083,7 @@ unsigned char I2CWriteOneByte(unsigned char id, unsigned char registerAddress, u
 
 #pragma config WPDIS = OFF
 
-# 124
+# 125
 void main(void) {
 
 unsigned char ADCbufferI2C[8];
@@ -9962,33 +10101,33 @@ uart_thread_struct uthread_data;
 timer1_thread_struct t1thread_data;
 timer0_thread_struct t0thread_data;
 
-# 151
+# 152
 OSCCON = 0xE0;
 OSCTUNEbits.PLLEN = 1;
 
-# 160
+# 161
 init_uart_recv(&uc);
 
-# 166
+# 167
 init_timer1_lthread(&t1thread_data);
 
 
 init_queues();
 
-# 187
+# 188
 OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
 
 
 OpenTimer1(0b11111111 & 0b10011111 & 0b11111111 & 0b11111111 & 0b11111011 & 0b11111111,0x0);
 
-# 198
+# 199
 IPR1bits.TMR1IP = 0;
 
 IPR1bits.RCIP = 0;
 
 IPR1bits.SSPIP = 1;
 
-# 226
+# 227
 PIE1bits.SSPIE = 1;
 
 
@@ -9996,23 +10135,20 @@ PIE1bits.SSPIE = 1;
 Open1USART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
 0b11111111 & 0b11101111, 0x19);
 
-# 239
+# 240
 enable_interrupts();
 
-# 261
+# 262
 I2CInit();
 
-unsigned char data[4];
-
-I2CWriteOneByte(0x50, 0x30, 0x22);
-I2CReadNBytes(1, data, 0x50, 0x30);
+DriverColorAdd(0x50);
 
 while (1) {
 
-# 274
+# 272
 block_on_To_msgqueues();
 
-# 281
+# 279
 length = ToMainHigh_recvmsg(10, &msgtype, (void *) msgbuffer);
 if (length < 0) {
 
@@ -10037,7 +10173,7 @@ break;
 case 42:
 {
 
-# 315
+# 313
 start_i2c_slave_reply(ADCBufferLen, ADCbufferI2C);
 
 break;
@@ -10061,6 +10197,8 @@ if (length != -4) {
 switch (msgtype) {
 case 11:
 {
+for (unsigned char i = 0; i < NumberOfDrivers; ++i)
+DriverTable[i].poll(DriverTable[i].context);
 timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
 break;
 };
