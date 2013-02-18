@@ -20,7 +20,6 @@
       <itemPath>../src/user_interrupts.h</itemPath>
       <itemPath>../src/router.h</itemPath>
       <itemPath>../src/debug.h</itemPath>
-      <itemPath>../src/driver.h</itemPath>
       <itemPath>../src/i2cMaster.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
