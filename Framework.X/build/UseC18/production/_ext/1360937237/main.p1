@@ -9,14 +9,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S2098 DRIVER_TABLE_ENT_T id context respond poll ]
 [s S2099 `uc 1 `uc 1 `uc 1 ]
 [n S2099 DRIVERColorMEMBERS id class a ]
-"16 ../src/debug.h
-[v _DebugPrint `(v ~T0 @X0 0 ef1`uc ]
 "19 ../src/i2cMaster.h
 [v _I2CReadRequest `(v ~T0 @X0 0 ef4`uc`uc`*uc`i ]
 "19 ../src/my_uart.h
 [v _start_UART_send `(v ~T0 @X0 0 ef2`uc`*uc ]
 [s S2104 `uc 1 `uc 1 `uc 1 ]
 [n S2104 DRIVERIRMEMBERS id class a ]
+"16 ../src/debug.h
+[v _DebugPrint `(v ~T0 @X0 0 ef1`uc ]
+[s S2109 `uc 1 `uc 1 `uc 1 ]
+[n S2109 DRIVERMotorMEMBERS id class a ]
 [s S1801 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S1801 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
 [s S1802 :1 `uc 1 ]
@@ -39,8 +41,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1800 . . . . . . . . . . ]
 "28828 /Applications/microchip/xc8/v1.12/include/pic18f2680.h
 [v _LATAbits `VS1800 ~T0 @X0 0 e@3977 ]
-[s S2109 `uc 1 `uc 1 `uc 1 ]
-[n S2109 DRIVERMotorMEMBERS id class a ]
 [p mainexit ]
 [s S2090 `uc -> 8 `i `uc 1 `uc -> 8 `i `uc 1 `uc 1 ]
 [n S2090 __uart_comm buffer buflen outbuffer outbuflen outbufind ]
@@ -96,8 +96,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S1851 . . . . ]
 "29934
 [v _PIE1bits `VS1851 ~T0 @X0 0 e@3997 ]
-"581 /Applications/microchip/xc8/v1.12/include/plib/usart.h
-[v _OpenUSART `(v ~T0 @X0 0 ef2`uc`ui ]
 "12 ../src/interrupts.h
 [v _enable_interrupts `(v ~T0 @X0 0 ef ]
 "17 ../src/i2cMaster.h
@@ -15016,93 +15014,84 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _self `*S2099 ~T0 @X0 1 a ]
 [; ;Color.h: 13: DriverColorMembers *self = (DriverColorMembers *)driver;
 [e = _self -> _driver `*S2099 ]
-[; ;Color.h: 15: self->a = 0xE;
-"15
-[e = . *U _self 2 -> -> 14 `i `uc ]
-[; ;Color.h: 16: DebugPrint(self->a);
-"16
-[e ( _DebugPrint (1 . *U _self 2 ]
-[; ;Color.h: 18: }
-"18
+[; ;Color.h: 17: }
+"17
 [e :UE 2100 ]
 }
-"19
+"18
 [v _DriverColorRespond `(v ~T0 @X0 1 ef2`*S2096`*uc ]
 {
-[; ;Color.h: 19: void DriverColorRespond(Driver_t *driver, unsigned char *rcvData) {
+[; ;Color.h: 18: void DriverColorRespond(Driver_t *driver, unsigned char *rcvData) {
 [e :U _DriverColorRespond ]
 [v _driver `*S2096 ~T0 @X0 1 r1 ]
 [v _rcvData `*uc ~T0 @X0 1 r2 ]
 [f ]
-"20
+"19
 [v _self `*S2099 ~T0 @X0 1 a ]
-[; ;Color.h: 20: DriverColorMembers *self = (DriverColorMembers *)driver;
+[; ;Color.h: 19: DriverColorMembers *self = (DriverColorMembers *)driver;
 [e = _self -> _driver `*S2099 ]
-[; ;Color.h: 23: }
-"23
+[; ;Color.h: 22: }
+"22
 [e :UE 2101 ]
 }
-"24
+"23
 [v _DriverColorPoll `(v ~T0 @X0 1 ef1`*S2096 ]
 {
-[; ;Color.h: 24: void DriverColorPoll(Driver_t *driver) {
+[; ;Color.h: 23: void DriverColorPoll(Driver_t *driver) {
 [e :U _DriverColorPoll ]
 [v _driver `*S2096 ~T0 @X0 1 r1 ]
 [f ]
-"25
+"24
 [v _self `*S2099 ~T0 @X0 1 a ]
-[; ;Color.h: 25: DriverColorMembers *self = (DriverColorMembers *)driver;
+[; ;Color.h: 24: DriverColorMembers *self = (DriverColorMembers *)driver;
 [e = _self -> _driver `*S2099 ]
+"26
+[v _data `uc ~T0 @X0 -> 3 `i a ]
+[; ;Color.h: 26: unsigned char data[3];
+[; ;Color.h: 27: I2CReadRequest(self->id, 0x10, data, 3);
 "27
-[v _data `uc ~T0 @X0 -> -> 1 `i `ux a ]
-[; ;Color.h: 27: unsigned char data[1];
-[; ;Color.h: 28: data[0] = 0x2;
+[e ( _I2CReadRequest (4 , , , . *U _self 0 -> -> 16 `i `uc &U _data -> 3 `i ]
+[; ;Color.h: 28: start_UART_send(3, &data[0]);
 "28
-[e = *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux -> -> 2 `i `uc ]
-[; ;Color.h: 29: I2CReadRequest(self->id, 0x30, data, 1);
-"29
-[e ( _I2CReadRequest (4 , , , . *U _self 0 -> -> 48 `i `uc &U _data -> 1 `i ]
-[; ;Color.h: 30: start_UART_send(1, data);
+[e ( _start_UART_send (2 , -> -> 3 `i `uc &U *U + &U _data * -> -> -> 0 `i `ui `ux -> -> # *U &U _data `ui `ux ]
+[; ;Color.h: 30: }
 "30
-[e ( _start_UART_send (2 , -> -> 1 `i `uc &U _data ]
-[; ;Color.h: 32: }
-"32
 [e :UE 2102 ]
 }
-"34
+"32
 [v _DriverColorAdd `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;Color.h: 34: void DriverColorAdd(unsigned char id) {
+[; ;Color.h: 32: void DriverColorAdd(unsigned char id) {
 [e :U _DriverColorAdd ]
 [v _id `uc ~T0 @X0 1 r1 ]
 [f ]
-"35
+"33
 [v _context `*S2096 ~T0 @X0 1 a ]
-[; ;Color.h: 35: Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
+[; ;Color.h: 33: Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
 [e = _context -> ( _driverMalloc (1 -> -> # `S2096 `ui `i `*S2096 ]
-[; ;Color.h: 36: context->id = id;
-"36
+[; ;Color.h: 34: context->id = id;
+"34
 [e = . *U _context 0 _id ]
-[; ;Color.h: 37: context->class = 0x20;
-"37
+[; ;Color.h: 35: context->class = 0x20;
+"35
 [e = . *U _context 1 -> -> 32 `i `uc ]
-[; ;Color.h: 38: DriverTable[NumberOfDrivers].context = context;
-"38
+[; ;Color.h: 36: DriverTable[NumberOfDrivers].context = context;
+"36
 [e = . *U + &U _DriverTable * -> _NumberOfDrivers `ux -> -> # *U &U _DriverTable `ui `ux 1 _context ]
-[; ;Color.h: 39: DriverTable[NumberOfDrivers].respond = DriverColorRespond;
-"39
+[; ;Color.h: 37: DriverTable[NumberOfDrivers].respond = DriverColorRespond;
+"37
 [e = . *U + &U _DriverTable * -> _NumberOfDrivers `ux -> -> # *U &U _DriverTable `ui `ux 2 &U _DriverColorRespond ]
-[; ;Color.h: 40: DriverTable[NumberOfDrivers].poll = DriverColorPoll;
-"40
+[; ;Color.h: 38: DriverTable[NumberOfDrivers].poll = DriverColorPoll;
+"38
 [e = . *U + &U _DriverTable * -> _NumberOfDrivers `ux -> -> # *U &U _DriverTable `ui `ux 3 &U _DriverColorPoll ]
-[; ;Color.h: 41: ++NumberOfDrivers;
-"41
+[; ;Color.h: 39: ++NumberOfDrivers;
+"39
 [e =+ _NumberOfDrivers -> -> 1 `i `uc ]
-[; ;Color.h: 43: DriverColorInit(context);
-"43
+[; ;Color.h: 41: DriverColorInit(context);
+"41
 [e ( _DriverColorInit (1 _context ]
-[; ;Color.h: 44: }
-"44
+[; ;Color.h: 42: }
+"42
 [e :UE 2103 ]
 }
 [; ;IR.h: 4: typedef struct DRIVERIRMEMBERS {
@@ -15158,47 +15147,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _self `*S2104 ~T0 @X0 1 a ]
 [; ;IR.h: 25: DriverIRMembers *self = (DriverIRMembers *)driver;
 [e = _self -> _driver `*S2104 ]
-[; ;IR.h: 28: LATAbits.LATA1 = !LATAbits.LATA1;
-"28
-[e = . . _LATAbits 0 1 -> -> ! != -> . . _LATAbits 0 1 `i -> -> -> 0 `i `Vuc `i `i `uc ]
-[; ;IR.h: 30: }
-"30
+[; ;IR.h: 29: }
+"29
 [e :UE 2107 ]
 }
-"32
+"31
 [v _DriverIRAdd `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;IR.h: 32: void DriverIRAdd(unsigned char id) {
+[; ;IR.h: 31: void DriverIRAdd(unsigned char id) {
 [e :U _DriverIRAdd ]
 [v _id `uc ~T0 @X0 1 r1 ]
 [f ]
-"33
+"32
 [v _context `*S2096 ~T0 @X0 1 a ]
-[; ;IR.h: 33: Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
+[; ;IR.h: 32: Driver_t *context = (Driver_t *)driverMalloc(sizeof(Driver_t));
 [e = _context -> ( _driverMalloc (1 -> -> # `S2096 `ui `i `*S2096 ]
-[; ;IR.h: 34: context->id = id;
-"34
+[; ;IR.h: 33: context->id = id;
+"33
 [e = . *U _context 0 _id ]
-[; ;IR.h: 35: context->class = 0x3A;
-"35
+[; ;IR.h: 34: context->class = 0x3A;
+"34
 [e = . *U _context 1 -> -> 58 `i `uc ]
-[; ;IR.h: 36: DriverTable[NumberOfDrivers].context = context;
-"36
+[; ;IR.h: 35: DriverTable[NumberOfDrivers].context = context;
+"35
 [e = . *U + &U _DriverTable * -> _NumberOfDrivers `ux -> -> # *U &U _DriverTable `ui `ux 1 _context ]
-[; ;IR.h: 37: DriverTable[NumberOfDrivers].respond = DriverIRRespond;
-"37
+[; ;IR.h: 36: DriverTable[NumberOfDrivers].respond = DriverIRRespond;
+"36
 [e = . *U + &U _DriverTable * -> _NumberOfDrivers `ux -> -> # *U &U _DriverTable `ui `ux 2 &U _DriverIRRespond ]
-[; ;IR.h: 38: DriverTable[NumberOfDrivers].poll = DriverIRPoll;
-"38
+[; ;IR.h: 37: DriverTable[NumberOfDrivers].poll = DriverIRPoll;
+"37
 [e = . *U + &U _DriverTable * -> _NumberOfDrivers `ux -> -> # *U &U _DriverTable `ui `ux 3 &U _DriverIRPoll ]
-[; ;IR.h: 39: ++NumberOfDrivers;
-"39
+[; ;IR.h: 38: ++NumberOfDrivers;
+"38
 [e =+ _NumberOfDrivers -> -> 1 `i `uc ]
-[; ;IR.h: 41: DriverIRInit(context);
-"41
+[; ;IR.h: 40: DriverIRInit(context);
+"40
 [e ( _DriverIRInit (1 _context ]
-[; ;IR.h: 42: }
-"42
+[; ;IR.h: 41: }
+"41
 [e :UE 2108 ]
 }
 [; ;Motor.h: 4: typedef struct DRIVERMotorMEMBERS {
@@ -15391,9 +15377,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 186: OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
 "186
 [e ( _OpenTimer0 (1 -> & & & -> 255 `i -> 191 `i -> 223 `i -> 246 `i `uc ]
-[; ;main.c: 191: OpenTimer1(0b11111111 & 0b11111111 & 0b11111111 & 0b11111101 & 0b11110111 & 0b11111111);
+[; ;main.c: 191: OpenTimer1(0b11111111 & 0b11111111 & 0b10111111 & 0b11111101 & 0b11110111 & 0b11111111);
 "191
-[e ( _OpenTimer1 (1 -> & & & & & -> 255 `i -> 255 `i -> 255 `i -> 253 `i -> 247 `i -> 255 `i `uc ]
+[e ( _OpenTimer1 (1 -> & & & & & -> 255 `i -> 255 `i -> 191 `i -> 253 `i -> 247 `i -> 255 `i `uc ]
 [; ;main.c: 197: IPR1bits.TMR1IP = 0;
 "197
 [e = . . _IPR1bits 0 0 -> -> 0 `i `uc ]
@@ -15406,10 +15392,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 225: PIE1bits.SSPIE = 1;
 "225
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-[; ;main.c: 232: OpenUSART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
-[; ;main.c: 233: 0b11111111 & 0b11101111, 0x19);
-"233
-[e ( _OpenUSART (2 , -> & & & & & -> 127 `i -> 255 `i -> 254 `i -> 253 `i -> 255 `i -> 239 `i `uc -> -> 25 `i `ui ]
 [; ;main.c: 238: enable_interrupts();
 "238
 [e ( _enable_interrupts ..  ]

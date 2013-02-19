@@ -9,8 +9,7 @@ end
 
 @init = lambda do
   out %{
-    self->a = 0xE;
-    DebugPrint(self->a);
+    
   }
 end
 
@@ -21,9 +20,8 @@ end
 
 @poll = lambda do
   out %{
-   unsigned char data[1];
-   data[0] = 0x2;
-   I2CReadRequest(self->id, 0x30, data, 1);
-   start_UART_send(1, data);
-  }
+    unsigned char data[3];
+    I2CReadRequest(self->id, 0x10, data, 3);
+    start_UART_send(3, &data[0]);
+   }
 end

@@ -12,8 +12,7 @@
 void DriverColorInit(Driver_t *driver) {
 DriverColorMembers *self = (DriverColorMembers *)driver;
 
-    self->a = 0xE;
-    DebugPrint(self->a);
+    
   
 }
 void DriverColorRespond(Driver_t *driver, unsigned char *rcvData) {
@@ -24,11 +23,10 @@ DriverColorMembers *self = (DriverColorMembers *)driver;
 void DriverColorPoll(Driver_t *driver) {
 DriverColorMembers *self = (DriverColorMembers *)driver;
 
-   unsigned char data[1];
-   data[0] = 0x2;
-   I2CReadRequest(self->id, 0x30, data, 1);
-   start_UART_send(1, data);
-  
+    unsigned char data[3];
+    I2CReadRequest(self->id, 0x10, data, 3);
+    start_UART_send(3, &data[0]);
+   
 }
 
     void DriverColorAdd(unsigned char id) {

@@ -25,7 +25,6 @@ void DriverIRPoll(Driver_t *driver) {
 DriverIRMembers *self = (DriverIRMembers *)driver;
 
     //DebugPrint(self->id);
-    LATAbits.LATA1 = !LATAbits.LATA1;
   
 }
 

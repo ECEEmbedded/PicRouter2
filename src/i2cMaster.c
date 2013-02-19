@@ -107,7 +107,10 @@ unsigned char I2CRead(void){
         unsigned char temp;
 /* Reception works if transfer is initiated in read mode */
         RCEN = 1;        /* Enable data reception */
-        while(!BF);      /* wait for buffer full */
+//        while(!BF);      /* wait for buffer full */
+
+
+        for (int i = 0; i < 100; ++i);  //nop
         temp = SSPBUF;   /* Read serial buffer and store in temp register */
         I2CWait();       /* wait to check any pending transfer */
         return temp;     /* Return the read data from bus */
@@ -129,6 +132,7 @@ unsigned char I2CReadOneByte(unsigned char id, unsigned char registerAddress) {
 }
 
 void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
+
     I2CStart();
     I2CSend(id << 1);
 
@@ -136,8 +140,10 @@ void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned ch
 
     I2CRestart();
     
+    I2CSend(id << 1 | 1);
+
+
     for (int i = 0; i < N; ++i) {
-            I2CSend(id << 1 | 1);
             data[i] = I2CRead();
 
             if (i == N - 1)
@@ -147,6 +153,8 @@ void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned ch
     }
 
     I2CStop();
+
+
 }
 
 void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
@@ -160,3 +168,4 @@ void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned c
 
     I2CStop();
 }
+

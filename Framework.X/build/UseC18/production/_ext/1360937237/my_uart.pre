@@ -18712,18 +18712,13 @@ static uart_comm *uc_ptr;
 
 void start_UART_send(unsigned char len, unsigned char * msg) {
 for (uc_ptr->outbuflen = 0; uc_ptr->outbuflen < len; ++uc_ptr->outbuflen) {
-uc_ptr->outbuffer[uc_ptr->outbuflen] = msg[uc_ptr->outbuflen];
+
+WriteUSART(msg[uc_ptr->outbuflen]);
+while((!TXSTAbits.TRMT));
+
 }
-uc_ptr->outbuflen = len;
 
-uc_ptr->outbufind = 1;
-
-
-
-
-WriteUSART(uc_ptr->outbuffer[0]);
-
-
+# 31
 }
 
 void uart_recv_int_handler() {
@@ -18756,10 +18751,11 @@ ToMainLow_sendmsg(0, 30, (void *) 0);
 }
 
 void init_uart_snd_rcv(uart_comm *uc) {
+INTCONbits.PEIE = 1;
 uc_ptr = uc;
 uc_ptr->buflen = 0;
 
-# 65
+# 72
 OpenUSART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
 0b11111111 & 0b11101111, 0x19);
 
@@ -18774,7 +18770,6 @@ if (uc_ptr->outbufind < uc_ptr->outbuflen) {
 WriteUSART(uc_ptr->outbuffer[uc_ptr->outbufind]);
 
 ++uc_ptr->outbufind;
-INTCONbits.PEIE = 1;
 }
 }
 

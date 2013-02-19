@@ -18783,7 +18783,10 @@ unsigned char I2CRead(void){
 unsigned char temp;
 
 RCEN = 1;
-while(!BF);
+
+
+
+for (int i = 0; i < 100; ++i);
 temp = SSPBUF;
 I2CWait();
 return temp;
@@ -18805,6 +18808,7 @@ return out;
 }
 
 void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
+
 I2CStart();
 I2CSend(id << 1);
 
@@ -18812,8 +18816,10 @@ I2CSend(registerAddress);
 
 I2CRestart();
 
-for (int i = 0; i < N; ++i) {
 I2CSend(id << 1 | 1);
+
+
+for (int i = 0; i < N; ++i) {
 data[i] = I2CRead();
 
 if (i == N - 1)
@@ -18823,6 +18829,8 @@ I2CAck();
 }
 
 I2CStop();
+
+
 }
 
 void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N) {
@@ -18836,3 +18844,4 @@ I2CSend(data[i]);
 
 I2CStop();
 }
+

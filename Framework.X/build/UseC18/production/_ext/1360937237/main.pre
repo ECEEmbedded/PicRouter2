@@ -18892,8 +18892,7 @@ unsigned char a;
 void DriverColorInit(Driver_t *driver) {
 DriverColorMembers *self = (DriverColorMembers *)driver;
 
-self->a = 0xE;
-DebugPrint(self->a);
+
 
 }
 void DriverColorRespond(Driver_t *driver, unsigned char *rcvData) {
@@ -18904,10 +18903,9 @@ DriverColorMembers *self = (DriverColorMembers *)driver;
 void DriverColorPoll(Driver_t *driver) {
 DriverColorMembers *self = (DriverColorMembers *)driver;
 
-unsigned char data[1];
-data[0] = 0x2;
-I2CReadRequest(self->id, 0x30, data, 1);
-start_UART_send(1, data);
+unsigned char data[3];
+I2CReadRequest(self->id, 0x10, data, 3);
+start_UART_send(3, &data[0]);
 
 }
 
@@ -18948,7 +18946,6 @@ void DriverIRPoll(Driver_t *driver) {
 DriverIRMembers *self = (DriverIRMembers *)driver;
 
 
-LATAbits.LATA1 = !LATAbits.LATA1;
 
 }
 
@@ -19071,7 +19068,7 @@ OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
 
 
 
-OpenTimer1(0b11111111 & 0b11111111 & 0b11111111 & 0b11111101 & 0b11110111 & 0b11111111);
+OpenTimer1(0b11111111 & 0b11111111 & 0b10111111 & 0b11111101 & 0b11110111 & 0b11111111);
 
 # 197
 IPR1bits.TMR1IP = 0;
@@ -19083,13 +19080,7 @@ IPR1bits.SSPIP = 1;
 # 225
 PIE1bits.SSPIE = 1;
 
-# 232
-OpenUSART(0b01111111 & 0b11111111 & 0b11111110 & 0b11111101 &
-0b11111111 & 0b11101111, 0x19);
-
-
-
-
+# 238
 enable_interrupts();
 
 # 262

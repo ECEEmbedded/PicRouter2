@@ -22,6 +22,5 @@ end
 @poll = lambda do
   out %{
     //DebugPrint(self->id);
-    LATAbits.LATA1 = !LATAbits.LATA1;
   }
 end
