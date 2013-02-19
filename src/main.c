@@ -188,7 +188,7 @@ void main(void) {
     // MTJ added second argument for OpenTimer1()
     OpenTimer1(TIMER_INT_ON & T1_SOURCE_FOSC_4 & T1_PS_1_4 & T1_16BIT_RW & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF,0x0);
 #else
-    OpenTimer1(TIMER_INT_ON & T1_PS_1_8 & T1_8BIT_RW & T1_SOURCE_INT & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
+    OpenTimer1(TIMER_INT_ON & T1_PS_1_8 & T1_16BIT_RW & T1_SOURCE_INT & T1_OSC1EN_OFF & T1_SYNC_EXT_OFF);
 #endif
 
     // Decide on the priority of the enabled peripheral interrupts

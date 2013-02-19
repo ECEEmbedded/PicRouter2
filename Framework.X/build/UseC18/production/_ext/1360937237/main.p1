@@ -15377,9 +15377,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 186: OpenTimer0(0b11111111 & 0b10111111 & 0b11011111 & 0b11110110);
 "186
 [e ( _OpenTimer0 (1 -> & & & -> 255 `i -> 191 `i -> 223 `i -> 246 `i `uc ]
-[; ;main.c: 191: OpenTimer1(0b11111111 & 0b11111111 & 0b10111111 & 0b11111101 & 0b11110111 & 0b11111111);
+[; ;main.c: 191: OpenTimer1(0b11111111 & 0b11111111 & 0b11111111 & 0b11111101 & 0b11110111 & 0b11111111);
 "191
-[e ( _OpenTimer1 (1 -> & & & & & -> 255 `i -> 255 `i -> 191 `i -> 253 `i -> 247 `i -> 255 `i `uc ]
+[e ( _OpenTimer1 (1 -> & & & & & -> 255 `i -> 255 `i -> 255 `i -> 253 `i -> 247 `i -> 255 `i `uc ]
 [; ;main.c: 197: IPR1bits.TMR1IP = 0;
 "197
 [e = . . _IPR1bits 0 0 -> -> 0 `i `uc ]
