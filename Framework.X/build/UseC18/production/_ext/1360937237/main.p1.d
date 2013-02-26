@@ -4,7 +4,6 @@
 ../src/debug.h  \
 ../src/my_uart.h  \
 ../src/Motor.h  \
-../src/my_i2c.h  \
 ../src/maindefs.h  \
 ../src/messages.h  \
 ../src/interrupts.h  \

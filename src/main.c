@@ -12,7 +12,7 @@
 #include "interrupts.h"
 #include "messages.h"
 #include "my_uart.h"
-#include "my_i2c.h"
+//#include "my_i2c.h"
 #include "uart_thread.h"
 #include "timer1_thread.h"
 #include "timer0_thread.h"
@@ -132,7 +132,7 @@ void main(void) {
     unsigned char msgtype;
     unsigned char last_reg_recvd;
     uart_comm uc;
-    i2c_comm ic;
+//    i2c_comm ic;
     unsigned char msgbuffer[MSGLEN + 1];
     unsigned char i;
     uart_thread_struct uthread_data; // info for uart_lthread
@@ -171,7 +171,7 @@ void main(void) {
 
     // set direction for PORTB to output
     TRISA = 0x0;
-   // LATA = 0x0;
+    LATA = 0xFF;
 
     // how to set up PORTA for input (for the V4 board with the PIC2680)
     /*
@@ -336,8 +336,13 @@ void main(void) {
             switch (msgtype) {
                 case MSGT_TIMER1:
                 {
-                  for (unsigned char i = 0; i < NumberOfDrivers; ++i)
-                    DriverTable[i].poll(DriverTable[i].context);
+//                    for (unsigned char i = 0; i < NumberOfDrivers; ++i)
+//                        DriverTable[i].poll(DriverTable[i].context);
+
+//                    msgbuffer[0] = 0x10;
+//                    msgbuffer[1] = 0x5A;
+//                    i2c_master_send(0x4F, 1, msgbuffer);
+                    i2c_master_recv(0x4F, 0x10, 8);
                     timer1_lthread(&t1thread_data, msgtype, length, msgbuffer);
                     break;
                 };

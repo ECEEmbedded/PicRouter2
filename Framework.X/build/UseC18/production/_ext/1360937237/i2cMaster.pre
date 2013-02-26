@@ -1,7 +1,7 @@
 
 # 1 "../src/i2cMaster.c"
 
-# 44 "/Applications/microchip/xc8/v1.12/include/pic18f2680.h"
+# 44 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f2680.h"
 extern volatile unsigned char RXF6SIDH @ 0xD60;
 
 asm("RXF6SIDH equ 0D60h");
@@ -17767,7 +17767,7 @@ extern volatile __bit nW @ (((unsigned) &SSPSTAT)*8) + 2;
 
 extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 
-# 2008 "/Applications/microchip/xc8/v1.12/include/plib/adc.h"
+# 2008 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\adc.h"
 union ADCResult
 {
 int lr;
@@ -17794,7 +17794,7 @@ void SetChanADC(unsigned char );
 # 2100
 void SelChanConvADC( unsigned char );
 
-# 584 "/Applications/microchip/xc8/v1.12/include/plib/spi.h"
+# 584 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\spi.h"
 void OpenSPI( unsigned char sync_mode,
 unsigned char bus_mode,
 unsigned char smp_phase );
@@ -17807,7 +17807,7 @@ void putsSPI( unsigned char *wrptr );
 
 unsigned char ReadSPI( void );
 
-# 414 "/Applications/microchip/xc8/v1.12/include/plib/can2510.h"
+# 414 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\can2510.h"
 void CAN2510Initialize(  unsigned int configuration,
  unsigned char brp,
  unsigned char interruptFlags,
@@ -17914,7 +17914,7 @@ unsigned char CAN2510DataRead(  unsigned char bufferNum,
  unsigned char *numBytes,
  unsigned char *data );
 
-# 64 "/Applications/microchip/xc8/v1.12/include/plib/capture.h"
+# 64 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\capture.h"
 union capstatus
 {
 
@@ -17945,16 +17945,16 @@ void OpenCapture1 ( unsigned char config);
 unsigned int ReadCapture1 (void);
 void CloseCapture1 (void);
 
-# 385 "/Applications/microchip/xc8/v1.12/include/plib/compare.h"
+# 385 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\compare.h"
 void OpenCompare1(unsigned char config,unsigned int period);
 void CloseCompare1(void);
 
-# 36 "/Applications/microchip/xc8/v1.12/include/plib/EEP.h"
+# 36 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\EEP.h"
 void Busy_eep ( void );
 unsigned char Read_b_eep( unsigned int badd );
 void Write_b_eep( unsigned int badd, unsigned char bdata );
 
-# 2 "/Applications/microchip/xc8/v1.12/include/stddef.h"
+# 2 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\stddef.h"
 typedef int ptrdiff_t;
 typedef unsigned size_t;
 typedef unsigned short wchar_t;
@@ -17962,7 +17962,7 @@ typedef unsigned short wchar_t;
 # 13
 extern int errno;
 
-# 65 "/Applications/microchip/xc8/v1.12/include/GenericTypeDefs.h"
+# 65 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\GenericTypeDefs.h"
 typedef enum _BOOL { FALSE = 0, TRUE } BOOL;
 
 
@@ -18397,7 +18397,7 @@ struct
 } bits;
 } QWORD_VAL;
 
-# 113 "/Applications/microchip/xc8/v1.12/include/plib/flash.h"
+# 113 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\flash.h"
 extern void ReadFlash(unsigned long startaddr, unsigned int num_bytes, unsigned char *flash_array);
 
 # 120
@@ -18407,7 +18407,7 @@ extern void WriteBlockFlash(unsigned long startaddr, unsigned char num_blocks, u
 
 extern void WriteBytesFlash(unsigned long startaddr, unsigned int num_bytes, unsigned char *flash_array);
 
-# 775 "/Applications/microchip/xc8/v1.12/include/plib/i2c.h"
+# 775 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\i2c.h"
 void IdleI2C( void );
 
 void OpenI2C( unsigned char sync_mode, unsigned char slew );
@@ -18445,7 +18445,7 @@ unsigned char address,
 unsigned char *rdptr,
 unsigned char length );
 
-# 325 "/Applications/microchip/xc8/v1.12/include/plib/mwire.h"
+# 325 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\mwire.h"
 void OpenMwire( unsigned char sync_mode );
 
 unsigned char ReadMwire( unsigned char high_byte,
@@ -18457,7 +18457,7 @@ signed char WriteMwire( unsigned char data_out );
 # 354
 void getsMwire( unsigned char *rdptr, unsigned char length );
 
-# 126 "/Applications/microchip/xc8/v1.12/include/plib/portb.h"
+# 126 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\portb.h"
 void OpenPORTB( unsigned char config);
 
 # 176
@@ -18469,7 +18469,7 @@ void OpenRB1INT( unsigned char config);
 # 211
 void OpenRB2INT( unsigned char config);
 
-# 85 "/Applications/microchip/xc8/v1.12/include/plib/pwm.h"
+# 85 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\pwm.h"
 union PWMDC
 {
 unsigned int lpwm;
@@ -18483,7 +18483,7 @@ void SetDCPWM1 ( unsigned int duty_cycle);
 # 477
 void ClosePWM1 (void);
 
-# 16 "/Applications/microchip/xc8/v1.12/include/plib/reset.h"
+# 16 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\reset.h"
 char isMCLR(void);
 void StatusReset(void);
 char isPOR(void);
@@ -18501,12 +18501,12 @@ char isWDTWU(void);
 
 char isLVD(void);
 
-# 687 "/Applications/microchip/xc8/v1.12/include/plib/rtcc.h"
+# 687 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\rtcc.h"
 void Open_RTCC(void);
 void Close_RTCC(void);
 unsigned char update_RTCC(void);
 
-# 97 "/Applications/microchip/xc8/v1.12/include/plib/sw_i2c.h"
+# 97 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\sw_i2c.h"
 void SWStopI2C ( void );
 void SWStartI2C ( void );
 void SWRestartI2C ( void );
@@ -18519,7 +18519,7 @@ signed char SWWriteI2C(  unsigned char data_out );
 signed char SWGetsI2C(  unsigned char *rdptr,  unsigned char length );
 signed char SWPutsI2C(  unsigned char *wrptr );
 
-# 84 "/Applications/microchip/xc8/v1.12/include/plib/sw_spi.h"
+# 84 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\sw_spi.h"
 void OpenSWSPI(void);
 
 
@@ -18531,7 +18531,7 @@ void SetCSSWSPI(void);
 
 void ClearCSSWSPI(void);
 
-# 47 "/Applications/microchip/xc8/v1.12/include/plib/sw_uart.h"
+# 47 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\sw_uart.h"
 void OpenUART(void);
 
 unsigned char ReadUART(void);
@@ -18547,7 +18547,7 @@ extern void DelayRXBitUART (void);
 extern void DelayRXHalfBitUART(void);
 extern void DelayTXBitUART (void);
 
-# 36 "/Applications/microchip/xc8/v1.12/include/plib/timers.h"
+# 36 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\timers.h"
 union Timers
 {
 unsigned int lt;
@@ -18579,7 +18579,7 @@ void WriteTimer3 ( unsigned int timer3);
 # 1179
 void SetTmrCCPSrc( unsigned char );
 
-# 568 "/Applications/microchip/xc8/v1.12/include/plib/usart.h"
+# 568 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\usart.h"
 union USART
 {
 unsigned char val;
@@ -18605,7 +18605,7 @@ void putrsUSART ( const  char *data);
 # 654
 void baudUSART ( unsigned char baudconfig);
 
-# 87 "/Applications/microchip/xc8/v1.12/include/plib/xlcd.h"
+# 87 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\plib\xlcd.h"
 void OpenXLCD( unsigned char);
 
 # 92
@@ -18640,7 +18640,7 @@ extern void DelayFor18TCY(void);
 extern void DelayPORXLCD(void);
 extern void DelayXLCD(void);
 
-# 18 "/Applications/microchip/xc8/v1.12/include/pic18.h"
+# 18 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18.h"
 __attribute__((__unsupported__("The flash_write routine is no longer supported. Please use the peripheral library functions: WriteBytesFlash, WriteBlockFlash or WriteWordFlash"))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 
 
@@ -18652,7 +18652,7 @@ extern void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern void _delay3(unsigned char);
 
-# 7 "/Applications/microchip/xc8/v1.12/include/stdarg.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma intrinsic(__va_start)
@@ -18661,7 +18661,7 @@ extern void * __va_start(void);
 #pragma intrinsic(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 23 "/Applications/microchip/xc8/v1.12/include/stdio.h"
+# 23 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\stdio.h"
 extern int errno;
 
 # 54
@@ -18671,7 +18671,7 @@ char * ptr;
 void (* func)(char);
 };
 
-# 17 "/Applications/microchip/xc8/v1.12/include/conio.h"
+# 17 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\conio.h"
 extern int errno;
 
 
@@ -18688,7 +18688,7 @@ extern __bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 99 "/Applications/microchip/xc8/v1.12/include/stdio.h"
+# 99 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -18722,63 +18722,222 @@ void I2CReadRequest(unsigned char id, unsigned char registerAddress, unsigned ch
 
 void I2CWriteRequest(unsigned char id, unsigned char registerAddress, unsigned char *data, int N);
 
-# 9 "../src/i2cMaster.c"
+void i2c_configure_master(unsigned char);
+unsigned char i2c_master_send(unsigned char adr, unsigned char,unsigned char *);
+unsigned char i2c_master_recv(unsigned char ID, unsigned char adr, unsigned char);
+void i2c_master_int_handler();
+
+# 10 "../src/messages.h"
+typedef struct __msg {
+unsigned char full;
+unsigned char length;
+unsigned char msgtype;
+unsigned char data[10];
+} msg;
+
+typedef struct __msg_queue {
+msg queue[4];
+unsigned char cur_write_ind;
+unsigned char cur_read_ind;
+} msg_queue;
+
+# 43
+void init_queues(void);
+
+
+
+void SleepIfOkay(void);
+
+
+
+void block_on_To_msgqueues(void);
+
+# 57
+signed char ToMainLow_sendmsg(unsigned char,unsigned char,void *);
+signed char ToMainLow_recvmsg(unsigned char,unsigned char *,void *);
+
+# 64
+signed char ToMainHigh_sendmsg(unsigned char,unsigned char,void *);
+signed char ToMainHigh_recvmsg(unsigned char,unsigned char *,void *);
+
+# 71
+signed char FromMainLow_sendmsg(unsigned char,unsigned char,void *);
+signed char FromMainLow_recvmsg(unsigned char,unsigned char *,void *);
+
+# 78
+signed char FromMainHigh_sendmsg(unsigned char,unsigned char,void *);
+signed char FromMainHigh_recvmsg(unsigned char,unsigned char *,void *);
+
+# 4 "../src/i2cMaster.c"
+enum {
+I2C_IDLE,
+I2C_SENDING,
+I2C_REQUESTING,
+I2C_RECEIVING
+};
+
+typedef struct __i2c_comm {
+unsigned char buffer[10];
+unsigned char buflen;
+unsigned char buffind;
+unsigned char event_count;
+unsigned char status;
+unsigned char error_code;
+unsigned char error_count;
+} i2c_master_comm;
+
+static i2c_master_comm* i2c_p;
+
+# 35
+unsigned char i2c_master_send(unsigned char adr, unsigned char length, unsigned char *msg) {
+if (i2c_p->status != I2C_IDLE)
+return -1;
+
+for (i2c_p->buflen = 0; i2c_p->buflen < length; ++i2c_p->buflen) {
+i2c_p->buffer[i2c_p->buflen] = msg[i2c_p->buflen];
+}
+
+i2c_p->buffind = 0;
+SEN = 1;
+SSPIF = 1;
+SSPBUF = (adr << 1);
+i2c_p->status = I2C_SENDING;
+return(0);
+}
+
+# 64
+unsigned char i2c_master_recv(unsigned char ID, unsigned char adr, unsigned char length) {
+if (i2c_p->status != I2C_IDLE)
+return -1;
+
+i2c_p->buffind = 0;
+i2c_p->buflen = length;
+
+i2c_p->buffer[0] = adr;
+i2c_p->buffer[1] = ID;
+
+SEN = 1;
+SSPIF = 1;
+SSPBUF = (ID << 1);
+i2c_p->status = I2C_REQUESTING;
+
+return(0);
+}
+
+void i2c_master_int_handler() {
+
+LATAbits.LATA0 != LATAbits.LATA0;
+switch (i2c_p->status) {
+case I2C_IDLE: {
+
+break;
+}
+case I2C_SENDING: {
+if (i2c_p->buffind < i2c_p->buflen ) {
+SSPBUF = i2c_p->buffer[i2c_p->buffind++];
+} else {
+i2c_p->status = I2C_IDLE;
+PEN = 1;
+}
+break;
+}
+case I2C_REQUESTING: {
+switch (i2c_p->buffind) {
+case 0: {
+SSPBUF = i2c_p->buffer[0];
+++i2c_p->buffind;
+break;
+}
+case 1: {
+PEN = 1;
+++i2c_p->buffind;
+break;
+}
+case 2: {
+SEN = 1;
+SSPBUF = (i2c_p->buffer[1] << 1) | 0x01;
+i2c_p->buffind = 0;
+i2c_p->status = I2C_RECEIVING;
+}
+}
+break;
+}
+case I2C_RECEIVING: {
+if (RCEN == 0)
+RCEN = 1;
+if (i2c_p->buffind < i2c_p->buflen) {
+i2c_p->buffer[i2c_p->buffind++] = SSPBUF;
+ACKEN = 1;
+} else {
+i2c_p->status = I2C_IDLE;
+PEN = 1;
+RCEN = 0;
+}
+break;
+}
+}
+}
+
+# 142
 void I2CInit(void){
 TRISC3 = 1;
 TRISC4 = 1;
 SSPSTAT |= 0x80;
 SSPCON1 = 0x28;
 SSPADD = 0x28;
+
+i2c_p->status = I2C_IDLE;
 }
 
-# 23
+# 158
 void I2CStart(){
 SEN = 1;
 while(SEN);
 
 }
 
-# 35
+# 170
 void I2CStop(){
 PEN = 1;
 while(PEN);
 
 }
 
-# 47
+# 182
 void I2CRestart(){
 RSEN = 1;
 while(RSEN);
 }
 
-# 58
+# 193
 void I2CAck(){
 ACKDT = 0;
 ACKEN = 1;
 while(ACKEN);
 }
 
-# 70
+# 205
 void I2CNak(){
 ACKDT = 1;
 ACKEN = 1;
 while(ACKEN);
 }
 
-# 82
+# 217
 void I2CWait(){
 while ( ( SSPCON2 & 0x1F ) || ( SSPSTAT & 0x04 ) );
 
 }
 
-# 94
+# 229
 void I2CSend(unsigned char dat){
 SSPBUF = dat;
+SSPIF=0;
 while(BF);
 I2CWait();
 }
 
-# 106
+# 242
 unsigned char I2CRead(void){
 unsigned char temp;
 
@@ -18786,8 +18945,9 @@ RCEN = 1;
 
 
 
-for (int i = 0; i < 100; ++i);
+
 temp = SSPBUF;
+SSPIF=0;
 I2CWait();
 return temp;
 }
