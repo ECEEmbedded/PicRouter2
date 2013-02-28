@@ -169,9 +169,9 @@ void main(void) {
     // initialize message queues before enabling any interrupts
     init_queues();
 
-    // set direction for PORTB to output
-    TRISA = 0x0;
-    LATA = 0xFF;
+    // set direction for PORTA to output
+    TRISA = 0x00;
+    LATA = 0x00;
 
     // how to set up PORTA for input (for the V4 board with the PIC2680)
     /*
@@ -265,9 +265,8 @@ void main(void) {
     //Load Drivers
     DriverColorAdd(0x4F);
     DriverIRAdd(0x49);
-    
-    while (1) {
 
+    while (1) {
 
         // Call a routine that blocks until either on the incoming
         // messages queues has a message (this may put the processor into
@@ -293,6 +292,14 @@ void main(void) {
                     break;
                 };
                 case MSGT_I2C_DATA:
+                {
+                    if (msgbuffer[0] != 0xFF) {
+
+//LATAbits.LA3 = !LATAbits.LA3;
+
+                    }
+                    break;
+                };
                 case MSGT_I2C_DBG:
                 {
                     // Here is where you could handle debugging, if you wanted
